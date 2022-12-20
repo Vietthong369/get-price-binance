@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:3000">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo binance</title>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
+
+    <script>
+        var socket = io("http://localhost:3000");
+
+        socket.on("server-send-price",function(data){
+            $("h3").html(data);
+
+        });
+        
+        $(document).ready(function(data){
+           
+        $("#btnBuy").click(function(){
+            var amount = parseFloat($("#txtAmount").val());
+           
+            $.get("./buy/"+amount,function(data){
+                console.log(data);
+            }); 
+          
+        })
+
+        });
+    
+    </script>
+    <link rel="stylesheet" href="./layout.css">
+</head>
+<body>
+    <div id="wapper">
+        <div id="left">
+            <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div id="tradingview_d5723"></div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BTCUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">BTCUSDT chart</span></a> by TradingView</div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget(
+    {
+    "width": 500,
+    "height": 500,
+    "symbol": "BINANCE:BTCUSDT",
+    "interval": "240",
+    "timezone": "Asia/Tokyo",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "withdateranges": true,
+    "allow_symbol_change": true,
+    "studies": [
+      "Volume@tv-basicstudies",
+      "VWAP@tv-basicstudies"
+    ],
+    "container_id": "tradingview_d5723"
+  }
+    );
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+        </div>
+        <div id="right">
+            <h2>BTC/USDT</h2>
+             <h3></h3>
+        <div id="amount">
+             <input type="text" id="txtAmount" placeholder="Amount of BTC ">
+        </div>
+        <div>
+            <input type="button" id="btnBuy" value="Buy">
+            <input type="button" id="btnSell" value="Sell">
+        </div>
+        </div>
+    
+
+    </div>
+
+</body>
+</html>
