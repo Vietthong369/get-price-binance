@@ -29,14 +29,10 @@ function loadconfigFile(file){
         APIKEY: obj.API,
         APISECRET: obj.KEY
       });
-      
+
       
     require("./routes/client")(app,obj,binance);
 
     });
-
-    
-
-
 
 }

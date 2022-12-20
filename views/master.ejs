@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="http://207.180.192.97:3000">
+    <base href="http://localhost:3000">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <script src="./socket.io/socket.io.js"></script>
 
     <script>
-        var socket = io("http://207.180.192.97:3000");
+        var socket = io("http://localhost:3000");
 
         socket.on("server-send-price",function(data){
             $("h3").html(data);
@@ -25,10 +25,18 @@
             $.get("./buy/"+amount,function(data){
                 console.log(data);
             }); 
-          
+            
         })
+        $("#btnSell").click(function(){
+            var amount = parseFloat($("#txtAmount").val());
+           
+            $.get("./sell/"+amount,function(data){
+                console.log(data);
+            });
 
         });
+    });
+    
     
     </script>
     <link rel="stylesheet" href="./layout.css">
